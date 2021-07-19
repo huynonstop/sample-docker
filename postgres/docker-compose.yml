@@ -1,15 +1,20 @@
-version: '3'
+version: '3.8'
 services:
-  mydb:
+  db:
+    container_name: postgres_db
     image: postgres
+    # restart: always # It restarts the container when either the Docker daemon restarts or the container itself is manually restarted
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - 54320:5432
     environment:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: postgres
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: root
+        POSTGRES_DB: postgres_db
 volumes:
   db-data:
     external: true
+    
+# docker exec -it pg_container bash
+# psql --host=postgres_db --dbname=postgres_db --username=root
